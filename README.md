@@ -5,6 +5,10 @@ php-resque message dispatcher for ProophServiceBus
 
 Use [php-resque](https://github.com/chrisboulton/php-resque) as message dispatcher for [ProophServiceBus](https://github.com/prooph/service-bus).
 
+# Installation
+
+You can install the dispatcher via composer by adding `"prooph/psb-php-resque-dispatcher": "~0.1"` as requirement to your composer.json.
+
 Usage
 -----
 
