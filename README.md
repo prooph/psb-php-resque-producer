@@ -1,8 +1,6 @@
 php-resque message dispatcher for ProophServiceBus
 ==================================================
 
-php-resque message dispatcher for PSB
-
 [![Build Status](https://travis-ci.org/prooph/psb-php-resque-dispatcher.svg?branch=master)](https://travis-ci.org/prooph/psb-php-resque-dispatcher)
 
 Use [php-resque](https://github.com/chrisboulton/php-resque) as message dispatcher for [ProophServiceBus](https://github.com/prooph/service-bus).
