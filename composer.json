@@ -10,6 +10,13 @@
             "homepage": "http://www.codeliner.ws"
         }
     ],
+    "keywords": [
+        "prooph",
+        "php",
+        "cqrs",
+        "messaging",
+        "resque"
+    ],
     "require": {
         "php": ">=5.4",
         "chrisboulton/php-resque": "~1.2"
