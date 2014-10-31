@@ -12,6 +12,16 @@ Check the [example](examples/resque/simple-resque-sample.php). Set up the dispat
 the required components are provided by PSB and php-resque. This package only provides the glue code needed to let both
 systems work together.
 
+# Support
+
+- Ask questions on [prooph-users](https://groups.google.com/forum/?hl=de#!forum/prooph) google group.
+- File issues at [https://github.com/prooph/psb-php-resque-dispatcher/issues](https://github.com/prooph/psb-php-resque-dispatcher/issues).
+
+# Contribute
+
+Please feel free to fork and extend existing or add new features and send a pull request with your changes!
+To establish a consistent code quality, please provide unit tests for all your changes and may adapt the documentation.
+
 License
 -------
 
