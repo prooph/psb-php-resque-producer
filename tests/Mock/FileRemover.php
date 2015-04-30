@@ -22,7 +22,7 @@ class FileRemover
     /**
      * @param RemoveFileCommand $aCommand
      */
-    public function handleRemoveFileCommand(RemoveFileCommand $aCommand)
+    public function handle(RemoveFileCommand $aCommand)
     {
         @unlink($aCommand->getFile());
     }
