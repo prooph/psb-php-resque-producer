@@ -27,7 +27,7 @@ $commandBus->utilize(new \Prooph\ServiceBus\Router\CommandRouter([
 
 //The php-resque message consumer will receive a @see \Prooph\ServiceBus\Message\StandardMessage
 //Before the FileWriter can handle the message it needs to be translated back to a command
-$commandBus->utilize(new \Prooph\ServiceBus\Message\FromMessageTranslator());
+$commandBus->utilize(new \Prooph\ServiceBus\Message\FromRemoteMessageTranslator());
 
 //The FileWriter provides a handleWriteLine method so we can use the HandleCommandStrategy to invoke it
 $commandBus->utilize(new \Prooph\ServiceBus\InvokeStrategy\HandleCommandStrategy());

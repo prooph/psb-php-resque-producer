@@ -10,10 +10,15 @@
  */
 namespace Prooph\ServiceBus\Example\Resque {
 
-    use Prooph\ServiceBus\Command;
+    use Prooph\Common\Messaging\Command;
 
     class WriteLine extends Command
     {
+        public static function fromPayload($payload)
+        {
+            return new self(__CLASS__, $payload);
+        }
+
         protected function convertPayload($aText)
         {
             return array('line' => $aText);
@@ -45,7 +50,7 @@ namespace Prooph\ServiceBus\Example\Resque {
             $this->file = $aFile;
         }
 
-        public function handleWriteLine(WriteLine $aCommand)
+        public function handle(WriteLine $aCommand)
         {
             if (! @file_put_contents($this->file, $aCommand->getLine() . "\n", FILE_APPEND)) {
                 throw new \RuntimeException(

@@ -22,12 +22,11 @@ namespace {
     use Prooph\ServiceBus\CommandBus;
     use Prooph\ServiceBus\Example\Resque\FileWriter;
     use Prooph\ServiceBus\Example\Resque\WriteLine;
-    use Prooph\ServiceBus\InvokeStrategy\ForwardToMessageDispatcherStrategy;
+    use Prooph\ServiceBus\InvokeStrategy\ForwardToRemoteMessageDispatcherStrategy;
     use Prooph\ServiceBus\Message\PhpResque\MessageDispatcher;
-    use Prooph\ServiceBus\Message\ToMessageTranslator;
+    use Prooph\ServiceBus\Message\ProophDomainMessageToRemoteMessageTranslator;
     use Prooph\ServiceBus\Router\RegexRouter;
     use Zend\EventManager\EventInterface;
-    use Zend\EventManager\StaticEventManager;
 
     if (isset($_GET['write'])) {
 
@@ -42,7 +41,7 @@ namespace {
 
         $commandBus->utilize(new RegexRouter([RegexRouter::ALL => $messageDispatcher]));
 
-        $commandBus->utilize(new ForwardToMessageDispatcherStrategy(new ToMessageTranslator()));
+        $commandBus->utilize(new ForwardToRemoteMessageDispatcherStrategy(new ProophDomainMessageToRemoteMessageTranslator()));
 
         //The PhpResqueMessageDispatcher uses a Redis-Server to manage background jobs
         //We want to track the status of the job and therefor we use the event system of MessageDispatcher to capture the JobId

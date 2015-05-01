@@ -11,8 +11,8 @@
 
 namespace Prooph\ServiceBus\Message\PhpResque;
 
-use Prooph\ServiceBus\Message\MessageDispatcherInterface;
-use Prooph\ServiceBus\Message\MessageInterface;
+use Prooph\Common\Messaging\RemoteMessage;
+use Prooph\ServiceBus\Message\RemoteMessageDispatcher;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerInterface;
 
@@ -22,7 +22,7 @@ use Zend\EventManager\EventManagerInterface;
  * @package Prooph\ServiceBus\Message\PhpResque
  * @author Alexander Miertsch <contact@prooph.de>
  */
-class MessageDispatcher implements MessageDispatcherInterface
+class MessageDispatcher implements RemoteMessageDispatcher
 {
     /**
      * @var string
@@ -62,16 +62,16 @@ class MessageDispatcher implements MessageDispatcherInterface
     }
 
     /**
-     * @param MessageInterface $aMessage
+     * @param RemoteMessage $message
      * @return void
      */
-    public function dispatch(MessageInterface $aMessage)
+    public function dispatch(RemoteMessage $message)
     {
-        $this->events()->trigger(__FUNCTION__ . '.pre', $this, array('message' => $aMessage));
+        $this->events()->trigger(__FUNCTION__ . '.pre', $this, array('message' => $message));
 
         $payload = array(
-            'message_class' => get_class($aMessage),
-            'message_data'  => $aMessage->toArray()
+            'message_class' => get_class($message),
+            'message_data'  => $message->toArray()
         );
 
         $jobId = \Resque::enqueue($this->queue, $this->receiverJobClass, $payload, $this->trackStatus);
@@ -79,7 +79,7 @@ class MessageDispatcher implements MessageDispatcherInterface
         $this->events()->trigger(
             __FUNCTION__ . '.post',
             $this,
-            array('message' => $aMessage, 'jobId' => $jobId)
+            array('message' => $message, 'jobId' => $jobId)
         );
     }
 

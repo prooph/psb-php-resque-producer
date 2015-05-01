@@ -11,11 +11,11 @@
 
 namespace Prooph\ServiceBus\Message\PhpResque;
 
+use Prooph\Common\Messaging\MessageHeader;
 use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\EventBus;
 use Prooph\ServiceBus\Exception\CommandDispatchException;
 use Prooph\ServiceBus\Exception\EventDispatchException;
-use Prooph\ServiceBus\Message\MessageHeader;
 use Prooph\ServiceBus\StaticBusRegistry;
 
 /**
@@ -54,7 +54,7 @@ class MessageConsumerJob
     {
         $messageClass = $this->args['message_class'];
 
-        /* @var $message \Prooph\ServiceBus\Message\MessageInterface */
+        /* @var $message \Prooph\Common\Messaging\RemoteMessage*/
         $message = $messageClass::fromArray($this->args['message_data']);
 
         if ($message->header()->type() === MessageHeader::TYPE_COMMAND) {
