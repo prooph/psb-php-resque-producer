@@ -13,11 +13,11 @@ namespace Prooph\ServiceBusTest\Message\PhpResque;
 
 use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\EventBus;
-use Prooph\ServiceBus\InvokeStrategy\ForwardToMessageDispatcherStrategy;
+use Prooph\ServiceBus\InvokeStrategy\ForwardToRemoteMessageDispatcherStrategy;
 use Prooph\ServiceBus\InvokeStrategy\HandleCommandStrategy;
-use Prooph\ServiceBus\Message\FromMessageTranslator;
+use Prooph\ServiceBus\Message\FromRemoteMessageTranslator;
 use Prooph\ServiceBus\Message\PhpResque\MessageDispatcher;
-use Prooph\ServiceBus\Message\ToMessageTranslator;
+use Prooph\ServiceBus\Message\ProophDomainMessageToRemoteMessageTranslator;
 use Prooph\ServiceBus\Router\CommandRouter;
 use Prooph\ServiceBus\StaticBusRegistry;
 use Prooph\ServiceBusTest\Mock\FileRemover;
@@ -49,7 +49,7 @@ class PhpResqueMessageDispatcherTest extends TestCase
 
         $consumerCommandBus = new CommandBus();
 
-        $consumerCommandBus->utilize(new FromMessageTranslator());
+        $consumerCommandBus->utilize(new FromRemoteMessageTranslator());
 
         $consumerCommandBus->utilize(new CommandRouter([
             'Prooph\ServiceBusTest\Mock\RemoveFileCommand' => new FileRemover()
@@ -89,7 +89,7 @@ class PhpResqueMessageDispatcherTest extends TestCase
 
         $commandBus->utilize($commandRouter);
 
-        $commandBus->utilize(new ForwardToMessageDispatcherStrategy(new ToMessageTranslator()));
+        $commandBus->utilize(new ForwardToRemoteMessageDispatcherStrategy(new ProophDomainMessageToRemoteMessageTranslator()));
 
         $jobId = null;
 
