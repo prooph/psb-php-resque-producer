@@ -1,9 +1,9 @@
 php-resque message dispatcher for ProophServiceBus
 ==================================================
 
-[![Build Status](https://travis-ci.org/prooph/psb-php-resque-dispatcher.svg?branch=master)](https://travis-ci.org/prooph/psb-php-resque-dispatcher)
+##  Deprecated
 
-Use [php-resque](https://github.com/chrisboulton/php-resque) as message dispatcher for [ProophServiceBus](https://github.com/prooph/service-bus).
+This package is no longer maintained as we are focusing on improvements of the main prooph components. If you're looking for a redis message producer for prooph/service you can have a look at the [bernard](https://github.com/prooph/psb-bernard-producer) message producer. Bernard ships with a predis adapter.
 
 # Installation
 
